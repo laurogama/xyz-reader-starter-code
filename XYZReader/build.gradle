@@ -1,20 +1,23 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        google()
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:3.5.1'
     }
 }
 apply plugin: 'com.android.application'
 
 repositories {
-    mavenCentral()
+   jcenter()
+    google()
 }
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 19
