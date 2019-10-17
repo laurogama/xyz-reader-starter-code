@@ -14,5 +14,9 @@
     <dimen name="thumbnail_height">100dp</dimen>
     <dimen name="article_title_padding">16dp</dimen>
     <dimen name="article_title_padding_bottom">4dp</dimen>
-
+    <dimen name="appbar_height">158dp</dimen>
+    <dimen name="title_margin_start">24dp</dimen>
+    <dimen name="title_margin_bottom">8dp</dimen>
+    <dimen name="elevation_toolbar">4dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
 </resources>

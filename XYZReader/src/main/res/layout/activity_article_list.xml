@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,7 +20,7 @@
             android:paddingRight="@dimen/list_side_margin"
             android:paddingBottom="@dimen/recycler_view_padding_bottom"
             android:scrollbarStyle="outsideOverlay" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/toolbar_container"
@@ -30,7 +30,7 @@
         android:elevation="8dp"
         tools:targetApi="lollipop">
 
-        <android.support.v7.widget.Toolbar
+        <Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -45,7 +45,7 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/logo" />
 
-        </android.support.v7.widget.Toolbar>
+        </Toolbar>
     </FrameLayout>
 
 </FrameLayout>

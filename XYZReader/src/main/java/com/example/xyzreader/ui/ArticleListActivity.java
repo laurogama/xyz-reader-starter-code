@@ -1,17 +1,12 @@
 package com.example.xyzreader.ui;
 
-import android.app.LoaderManager;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -19,6 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
@@ -69,7 +71,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
         mRecyclerView = findViewById(R.id.recycler_view);
-        getLoaderManager().initLoader(0, null, this);
+        LoaderManager.getInstance(this).initLoader(0, null, this);
 
         if (savedInstanceState == null) {
             refresh();
@@ -191,7 +193,7 @@ public class ArticleListActivity extends AppCompatActivity implements
             }
             Picasso.with(ArticleListActivity.this)
                     .load(mCursor.getString(ArticleLoader.Query.THUMB_URL))
-                    .resize(600,400)
+                    .resize(600, 400)
                     .centerCrop()
                     .into(holder.thumbnailView);
         }
