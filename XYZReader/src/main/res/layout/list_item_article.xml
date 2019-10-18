@@ -17,8 +17,10 @@
         <!--suppress AndroidLintContentDescription -->
         <ImageView
             android:id="@+id/thumbnail"
-            android:layout_width="@dimen/thumbnail_width"
-            android:layout_height="@dimen/thumbnail_height" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secondary"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/article_title"
