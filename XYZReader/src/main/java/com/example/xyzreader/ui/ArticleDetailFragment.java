@@ -156,7 +156,15 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
+
+            new Thread(() -> {
+                String body = Html.fromHtml(
+                        mCursor.getString(ArticleLoader.Query.BODY)
+                                .replaceAll("(\r\n|\n)", "<br />")).toString();
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> bodyView.setText(body));
+                }
+            }).start();
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
