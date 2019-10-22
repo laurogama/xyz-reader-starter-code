@@ -14,4 +14,5 @@
     <dimen name="title_margin_bottom">8dp</dimen>
     <dimen name="elevation_toolbar">4dp</dimen>
     <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="detail_recycler_view_top_margin">160dp</dimen>
 </resources>

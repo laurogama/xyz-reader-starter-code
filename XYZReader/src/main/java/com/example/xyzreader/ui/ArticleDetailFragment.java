@@ -20,6 +20,7 @@ import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -29,6 +30,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -47,6 +50,7 @@ public class ArticleDetailFragment extends Fragment implements
     private View mRootView;
 
     private ImageView mPhotoView;
+    private TextAdapter mAdapter;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -107,7 +111,9 @@ public class ArticleDetailFragment extends Fragment implements
                 .setType("text/plain")
                 .setText("Some sample text")
                 .getIntent(), getString(R.string.action_share))));
-
+        RecyclerView mRecyclerView = mRootView.findViewById(R.id.rv_text_body);
+        mAdapter = new TextAdapter();
+        mRecyclerView.setAdapter(mAdapter);
         bindViews();
         return mRootView;
     }
@@ -130,7 +136,7 @@ public class ArticleDetailFragment extends Fragment implements
 
         TextView bylineView = mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
-        TextView bodyView = mRootView.findViewById(R.id.article_body);
+
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
@@ -157,14 +163,8 @@ public class ArticleDetailFragment extends Fragment implements
 
             }
 
-            new Thread(() -> {
-                String body = Html.fromHtml(
-                        mCursor.getString(ArticleLoader.Query.BODY)
-                                .replaceAll("(\r\n|\n)", "<br />")).toString();
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> bodyView.setText(body));
-                }
-            }).start();
+            mAdapter.setList(Arrays.asList(mCursor.getString
+                    (ArticleLoader.Query.BODY).split("(\r\n|\n)")));
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
@@ -183,7 +183,7 @@ public class ArticleDetailFragment extends Fragment implements
         } else {
             mRootView.setVisibility(View.GONE);
             bylineView.setText("N/A");
-            bodyView.setText("N/A");
+            mAdapter.setList(new ArrayList<>());
         }
     }
 
